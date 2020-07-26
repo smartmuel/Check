@@ -13,7 +13,7 @@ class DP(object):
             for j in DTCT["DP_Ports"]:  # For the ports the configured at Data_For_TCT.json
                 if (not re.search(rf"{j}\s+[0-9]+\s+0\s+0\s+[0-9]+\s+0\s+0", com, re.IGNORECASE)) and re.search(
                         rf"^{j}\s+", com, re.IGNORECASE):
-                    return com
+                    return f'{i}:\n{com}'
 
             else:
                 if Legit_Only:
@@ -25,25 +25,23 @@ class DP(object):
                                 re.IGNORECASE)) and (
                             not re.search(rf"Total Counters\s+: Forwards\s+=\s+[0-9]+\s+Discards\s+=\s+0", com,
                                           re.IGNORECASE)):
-                        return com
+                        return f'{i}:\n{com}'
 
     @staticmethod
     def No_BDOS_Attack():
         for i in list(DTCT.DP_Info.values()):
             telnet = Telnet(i)
-            com = telnet.Command("system internal security bdos attacks", True).split("\n")
-            if len(com) > 4:
-                return com
+            com = telnet.Command("system internal security bdos attacks", True)
+            if len(com.split("\n")) > 4:
+                return f'{i}:\n{com}'
 
     @staticmethod
     def BDOS_Attacks():
         for i in list(DTCT.DP_Info.values()):
             telnet = Telnet(i)
-            com = telnet.Command("system internal security bdos attacks", True).split("\n")
-            if len(com) < 5:
-                print(f"{getframeinfo(currentframe()).lineno} BDOS ATTACK:")
-                print(getframeinfo(currentframe()).lineno, com)
-                return com
+            com = telnet.Command("system internal security bdos attacks", True)
+            if len(com.split("\n")) < 5:
+                return f'{i}:\n{com}'
 
     @staticmethod
     def Support_File_Extract():
@@ -76,7 +74,7 @@ class DF(object):
         api = Vision_API()
         response1 = api.Get(f'https://{DTCT["Vision_IP"]}/mgmt/device/df/config/BgpPeers')
         response2 = api.Get(f'https://{DTCT["Vision_IP"]}/mgmt/device/df/config/Announcements', True)
-        if len(response1["BgpPeers"]) * (len(Check.start) + DTCT["OngoingProtections"]) > len(
+        if len(response1["BgpPeers"]) * (len(Syslog.start) + DTCT["OngoingProtections"]) > len(
                 response2["Announcements"]):
             """peers = dict()
             for i in response1["BgpPeers"]:
@@ -236,8 +234,8 @@ class FD(object):
     def Detection_Syslog_DF():
             response = requests.get(f'http://{DTCT["FD_IP"]}:10007/blackhole',
                                     auth=(DTCT["FD_Username"], DTCT["FD_Password"]))
-            if len(response.json()["values"]) != len(Check.start):
-                return f'Number of Attack Start Captured: {len(Check.start)}\n\n{Check.start}\n\nNumber of Blackholes: {len(response.json()["values"])}\n\n{response.json()["values"]}'
+            if len(response.json()["values"]) != len(Syslog.start):
+                return f'Number of Attack Start Captured: {len(Syslog.start)}\n\n{Syslog.start}\n\nNumber of Blackholes: {len(response.json()["values"])}\n\n{response.json()["values"]}'
 
 class BSN(object):
     """
@@ -275,4 +273,3 @@ class Other(object):
                     No_Ping = f'{No_Ping}\n{i}'
             if No_Ping:
                 return f'No Ping:{No_Ping}'
-
