@@ -1,4 +1,5 @@
 from TCT import *
+import pytest, allure
 
 class DP(object):
     """
@@ -127,10 +128,8 @@ class Vision(object):
                 driver = Driver()
             else:
                 driver_flag = False
-            driver.Click(
-                "#global-menu > nav > ul > li:nth-child(3) > div.sub-menu-children.sc-feryYK.cwTrTn > div > div > div.NavItemContentstyle__StyledIcon-ob11v-0.WNjlY")
-            driver.Click(
-                "#global-menu > nav > ul > li.sub-menu-expanded.sc-gldTML.bYAUWd > div.sc-cJOK.bVfJMK > div:nth-child(8) > div > div.NavItemContentstyle__StyledLabelContainer-ob11v-1.erVzTj")
+            driver.Click('//*[@data-debug-id="ANALYTICS_AMS_ICON"]}"]')
+            driver.Click('//*[@data-debug-id="AMS_REPORTS_ICON"]}"]')
             if driver.Wait(f'//*[@data-debug-id="vrm-forensics-views-list-item-expand_{DTCT["Fill_Name"]}"]'):
                 driver.Click(f'//*[@data-debug-id="vrm-forensics-views-list-item-expand_{DTCT["Fill_Name"]}"]')
             else:
