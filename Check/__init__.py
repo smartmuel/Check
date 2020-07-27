@@ -133,35 +133,24 @@ class Vision(object):
             if driver.Wait(f'//*[@data-debug-id="vrm-forensics-views-list-item-expand_{DTCT["Fill_Name"]}"]'):
                 driver.Click(f'//*[@data-debug-id="vrm-forensics-views-list-item-expand_{DTCT["Fill_Name"]}"]')
             else:
-                driver.Click(
-                    "#main-content > div.vrm-reports-container > div.reports-main-content > div.reports-list-placeholder > div > div.vrm-report-list-title-wrapper > button")
-                driver.Fill(
-                    "#main-content > div.vrm-reports-container > div.reports-main-content > div.report-preview > div > div > div > div.wizard-form-content > div.wizard-form-content--header.not-valid > div > div.form-content-header--content > div > div.wizard-form-content-header--input-wrapper > div.new-filter-wrapper > input",
-                    DTCT["Fill_Name"])
+                driver.Click('//*[@data-debug-id="vrm-reports-list-add-report"]')
+                driver.Fill('//*[@data-debug-id="wizard-form-content-input-report-name-input"]',DTCT["Fill_Name"])
                 driver.Click('//*[@data-debug-id="template_"]')
                 time.sleep(1)
                 driver.Click('//*[@data-debug-id="template_DefenseFlow Analytics Dashboard"]')
-                driver.Click('#visionAppRoot > div > div > div.footer > button:nth-child(2)')
-                driver.Click(
-                    '#main-content > div.vrm-reports-container > div.reports-main-content > div.report-preview > div > div > div > div.wizard-form-content > div.wizard-form-content--main > div > div:nth-child(1) > div.tab-header.collapsed-header.with-error')
-                driver.Click(
-                    '#main-content > div.vrm-reports-container > div.reports-main-content > div.report-preview > div > div > div > div.wizard-form-content > div.wizard-form-content--main > div > div:nth-child(1) > div.tab-body.expanded > div > div > div.device-filter-search-bar-container > div > label')
-                driver.Click(
-                    '#main-content > div.vrm-reports-container > div.reports-main-content > div.report-preview > div > div > div > div.wizard-form-content > div.wizard-form-content--main > div > div:nth-child(5) > div.tab-header.collapsed-header')
-                driver.Click('#csv')
-                driver.Click(
-                    '#main-content > div.vrm-reports-container > div.reports-main-content > div.report-preview > div > div > div > div.wizard-form-footer > div > button.form-button.form-submit')
+                driver.Click('//*[@data-debug-id="VRM_Templates_Modal_Apply"]')
+                driver.Click('//*[@data-debug-id="Wizard_step_scope-tab"]')
+                driver.Click('//*[@data-debug-id="checkbox_select-all_Label"]')
+                driver.Click('//*[@data-debug-id="Wizard_step_format-tab"]')
+                driver.Click('//*[@data-debug-id="vrm_export_report_format_csv"]')
+                driver.Click('//*[@data-debug-id="Wizard_Submit_button"]')
                 driver.Click(f'//*[@data-debug-id="vrm-forensics-views-list-item-expand_{DTCT["Fill_Name"]}"]')
-            driver.Click(
-                "#main-content > div.vrm-reports-container > div.reports-main-content > div.reports-list-placeholder > div > ul > li > div.vrm-reports-item-expaneded-details > div > div.vrm-reports-item-expaneded-details-header > div > button")
+            driver.Click(f'//*[@data-debug-id="vrm-reports-generate_{DTCT["Fill_Name"]}"]')
             driver.Displayed("div > div > div > div > div.loading-dots--dot-yellow")
-            driver.Click(
-                "#main-content > div.vrm-reports-container > div.reports-main-content > div.reports-list-placeholder > div > ul > li > div.vrm-reports-item-expaneded-details > div > div.reports-logs > div > div > ul > li:nth-child(1) > li > a")
-            driver.Click(
-                "#main-content > div.vrm-reports-container > div.reports-main-content > div.report-preview > div > div > header > button")
+            driver.Click(f'//*[@data-debug-id="VRM_Reports_Log_preview_{DTCT["Fill_Name"]}"]')
+            driver.Click(f'//*[@data-debug-id="VRM_Reports_Log_preview_Download_{DTCT["Fill_Name"]}"]')
             driver.Click(f'//*[@data-debug-id="vrm-forensics-delete-item-button_{DTCT["Fill_Name"]}"]')
-            driver.Click(
-                '#main-content > div.vrm-reports-container > div.reports-main-content > div.reports-list-placeholder > div > ul > li > div.vrm-reports-item-main-details.selected > div.vrm-reports-list-item-actions-container > div.vrm-forensics-delete-item-wrapper > div > div.vrm-forensics-delete-item-confirm')
+            driver.Click('//*[@data-debug-id="vrm-forensics-delete-item-confirm"]')
             if not file_check():
                 return "File not downloaded after the default time"
 
