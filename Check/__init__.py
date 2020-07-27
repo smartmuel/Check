@@ -128,8 +128,8 @@ class Vision(object):
                 driver = Driver()
             else:
                 driver_flag = False
-            driver.Click('//*[@data-debug-id="ANALYTICS_AMS_ICON"]}"]')
-            driver.Click('//*[@data-debug-id="AMS_REPORTS_ICON"]}"]')
+            driver.Click('//*[@data-debug-id="ANALYTICS_AMS_ICON"]')
+            driver.Click('//*[@data-debug-id="AMS_REPORTS_ICON"]')
             if driver.Wait(f'//*[@data-debug-id="vrm-forensics-views-list-item-expand_{DTCT["Fill_Name"]}"]'):
                 driver.Click(f'//*[@data-debug-id="vrm-forensics-views-list-item-expand_{DTCT["Fill_Name"]}"]')
             else:
