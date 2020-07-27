@@ -48,6 +48,7 @@ class DP(object):
     def Support_File_Extract():
         with CM.Chrome() as driver:
             for i in DTCT.DP_Info.keys():
+                driver.Click('//*[@data-debug-id="VISIONSETTINGS_ICON"]')
                 driver.Click(f"gwt-debug-DevicesTree_Node_{i}")
                 driver.ClickIf('//*[@title="Click to lock the device"]', delay=3)
                 driver.Click("gwt-debug-DeviceControlBar_Operations")
