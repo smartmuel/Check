@@ -105,7 +105,7 @@ class DF(object):
                 "#dfc-vision-support > div > div > div:nth-child(1) > div > div > div:nth-child(1) > button")
             driver.Click(
                 "body > div.ReactModalPortal > div > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(1) > button")
-            if file_check(extract=False):
+            if not file_check(extract=False):
                 return "File not downloaded after the default time"
 
 class Vision(object):
