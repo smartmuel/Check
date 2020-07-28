@@ -3,7 +3,7 @@ import subprocess
 import sys
 
 def install():
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "git+https://github.com/smartmuel/TCT.git#egg=TCT"])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "git+https://github.com/smartmuel/TCT.git"])
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
